@@ -15,7 +15,7 @@ namespace WebApi
     public class Startup
     {
         private IClusterClient _client;
-        private ILogger _logger;
+        private ILogger<Startup> _logger;
 
         public Startup(IConfiguration configuration)
         {
@@ -27,13 +27,15 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddSingleton(CreateClueterClient);
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
+            _logger = logger;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

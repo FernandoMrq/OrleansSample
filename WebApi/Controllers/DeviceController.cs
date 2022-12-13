@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class DeviceController : ControllerBase
     {
         private readonly IClusterClient _client;
